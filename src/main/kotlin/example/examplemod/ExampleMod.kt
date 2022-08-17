@@ -1,13 +1,19 @@
 package example.examplemod
 
 import example.examplemod.block.ModBlocks
+import example.examplemod.client.ClientRegistry
+import example.examplemod.entity.EntityRegistry
 import net.minecraft.client.Minecraft
+import net.minecraft.world.item.CreativeModeTab
+import net.minecraft.world.item.ItemStack
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext
 import org.apache.logging.log4j.Level
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
+import thedarkcolour.kotlinforforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.forge.runForDist
 
@@ -24,24 +30,32 @@ object ExampleMod {
 
     // the logger for our mod
     val LOGGER: Logger = LogManager.getLogger(ID)
+    var itemGroup: CreativeModeTab =
+        object : CreativeModeTab(getGroupCountSafe(), ID) {
+            override fun makeIcon(): ItemStack {
+                return ModBlocks.CASH_REGISTER.asItem().defaultInstance
+            }
+        }
 
     init {
         LOGGER.log(Level.INFO, "Hello world!")
 
         // Register the KDeferredRegister to the mod-specific event bus
-        ModBlocks.REGISTRY.register(MOD_BUS)
-
+        ModBlocks.BLOCK_REGISTRY.register(MOD_BUS)
+        ModBlocks.TILE_REGISTRY.register(MOD_BUS)
+        ModBlocks.ITEM_REGISTRY.register(MOD_BUS)
+        EntityRegistry.ENTITIES.register(MOD_BUS)
+        MOD_BUS.addListener(EntityRegistry::registerAttributes)
         val obj = runForDist(
             clientTarget = {
                 MOD_BUS.addListener(::onClientSetup)
+                MOD_BUS.addListener(ClientRegistry::renderEvent)
                 Minecraft.getInstance()
             },
             serverTarget = {
                 MOD_BUS.addListener(::onServerSetup)
                 "test"
             })
-
-        println(obj)
     }
 
     /**
