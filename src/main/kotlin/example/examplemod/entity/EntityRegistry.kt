@@ -19,9 +19,10 @@ object EntityRegistry {
     }
 
     val VILLAGER_CUSTOMER = registerEntity<VillagerCustomer>("vill_customer", EntityType.Builder.of(::VillagerCustomer, MobCategory.CREATURE).sized(0.6f, 1.8f))
+    val SEAT = registerEntity<SeatEntity>("seat", EntityType.Builder.of(::SeatEntity, MobCategory.MISC).sized(0.25f, 0.35f))
 
     fun registerAttributes(event: EntityAttributeCreationEvent){
         event.put(VILLAGER_CUSTOMER.get(), Mob.createMobAttributes().add(Attributes.MOVEMENT_SPEED, Attributes.MOVEMENT_SPEED.defaultValue)
-            .add(Attributes.MAX_HEALTH, 20.0).build() )
+            .add(Attributes.MAX_HEALTH, 20.0).build())
     }
 }
