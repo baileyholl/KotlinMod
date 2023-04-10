@@ -2,6 +2,7 @@ package example.examplemod.block
 
 import example.examplemod.ExampleMod
 import example.examplemod.block.tile.CashRegisterTile
+import example.examplemod.block.tile.ManagementTile
 import example.examplemod.block.tile.SeatTile
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
@@ -23,6 +24,10 @@ object ModBlocks {
         CashRegister(defaultProperties())
     }
 
+    val MANAGEMENT_DESK by BLOCK_REGISTRY.registerObject("management_desk") {
+        ManagementDesk(defaultProperties())
+    }
+
     val SEAT by BLOCK_REGISTRY.registerObject("seat") {
         Seat(defaultProperties())
     }
@@ -31,6 +36,10 @@ object ModBlocks {
 
     val CASH_REGISTER_TILE by TILE_REGISTRY.registerObject("cash_register") {
         tileBuilder(::CashRegisterTile, CASH_REGISTER)
+    }
+
+    val MANAGEMENT_TILE by TILE_REGISTRY.registerObject("management_desk") {
+        tileBuilder(::ManagementTile, MANAGEMENT_DESK)
     }
 
     val SEAT_TILE by TILE_REGISTRY.registerObject("seat") {
