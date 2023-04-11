@@ -1,6 +1,5 @@
 package example.examplemod.api
 
-import example.examplemod.extensions.distanceFrom
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.Level
 
@@ -19,11 +18,11 @@ object CafeManager {
         var nearest: CafeData? = null
         var nearestDist = Double.MAX_VALUE
         for (cafe in cafeMap.getOrDefault(level, HashMap()).values) {
-            val dist = pos.distanceFrom(cafe.registerPos)
-            if (dist < nearestDist && dist <= maxDistance) {
-                nearest = cafe
-                nearestDist = dist
-            }
+//            val dist = pos.distanceFrom(cafe.registerPos)
+//            if (dist < nearestDist && dist <= maxDistance) {
+//                nearest = cafe
+//                nearestDist = dist
+//            }
         }
         return nearest
     }

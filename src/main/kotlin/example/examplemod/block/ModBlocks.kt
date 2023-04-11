@@ -46,14 +46,18 @@ object ModBlocks {
         tileBuilder(::SeatTile, SEAT)
     }
 
-    val ITEM_REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, ExampleMod.ID)
+    val BLOCK_ITEM_REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, ExampleMod.ID)
 
-    val CASH_REGISTER_ITEM by ITEM_REGISTRY.registerObject("cash_register") {
+    val CASH_REGISTER_ITEM by BLOCK_ITEM_REGISTRY.registerObject("cash_register") {
         BlockItem(CASH_REGISTER, defaultItemProperties())
     }
 
-    val SEAT_ITEM by ITEM_REGISTRY.registerObject("seat"){
+    val SEAT_ITEM by BLOCK_ITEM_REGISTRY.registerObject("seat"){
         BlockItem(SEAT, defaultItemProperties())
+    }
+
+    val DESK_ITEM by BLOCK_ITEM_REGISTRY.registerObject("management_desk"){
+        BlockItem(MANAGEMENT_DESK, defaultItemProperties())
     }
 
     fun <T : BlockEntity?> tileBuilder(factory:BlockEntityType.BlockEntitySupplier<T>, block:Block):BlockEntityType<T> {

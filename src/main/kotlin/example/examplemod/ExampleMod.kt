@@ -3,17 +3,16 @@ package example.examplemod
 import example.examplemod.block.ModBlocks
 import example.examplemod.client.ClientRegistry
 import example.examplemod.entity.EntityRegistry
+import example.examplemod.item.ModItems
 import net.minecraft.client.Minecraft
 import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.ItemStack
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext
 import org.apache.logging.log4j.Level
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
-import thedarkcolour.kotlinforforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.forge.runForDist
 
@@ -43,7 +42,8 @@ object ExampleMod {
         // Register the KDeferredRegister to the mod-specific event bus
         ModBlocks.BLOCK_REGISTRY.register(MOD_BUS)
         ModBlocks.TILE_REGISTRY.register(MOD_BUS)
-        ModBlocks.ITEM_REGISTRY.register(MOD_BUS)
+        ModBlocks.BLOCK_ITEM_REGISTRY.register(MOD_BUS)
+        ModItems.ITEM_REGISTERY.register(MOD_BUS)
         EntityRegistry.ENTITIES.register(MOD_BUS)
         MOD_BUS.addListener(EntityRegistry::registerAttributes)
         val obj = runForDist(
